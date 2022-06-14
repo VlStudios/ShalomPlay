@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import OnboardingScreen from './screens/OnboardingScreen';
 import LoginScreen from './screens/LoginScreen';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
  
 const AppStack = createStackNavigator();
 
