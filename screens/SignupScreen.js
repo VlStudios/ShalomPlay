@@ -1,28 +1,18 @@
-import React, { useEffect ,useState ,useCallback} from 'react';
+import React, {useState} from 'react';
 import { View ,Text , TouchableOpacity, Image, StyleSheet } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import {windowHeight, windowWidth} from '../utils/Dimentions';
 
-
-const LoginScreen = ({navigation}) => {
-
-
+const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
 
     return (
-      <View 
-        style={styles.container}>
-        <View style={styles.header}>
-        <Image
-          source={require('../assets/fotoD.png')}
-          style={styles.logo}
-        />
-        </View>
-        <View style={styles.footer}>
-        
+      <View style={styles.container}>
+        <Text style={styles.text}>Criar Conta</Text>
         <FormInput
           labelValue={email}
           onChangeText={(userEmail) => setEmail(userEmail)}
@@ -43,14 +33,27 @@ const LoginScreen = ({navigation}) => {
             
         />
 
+        <FormInput
+            labelValue={confirmPassword}
+            onChangeText={(userPassword) => setPassword(userPassword)}
+            placeholderText="Confirme Sua Senha"
+            iconType="lock"
+            secureTextEntry={true}
+            
+         />
 
         <FormButton
-            buttonTitle="Entrar"
-            onPress={() => alert('Logado com sucesso')}
+            buttonTitle="Criar Conta"
+            onPress={() => alert('Criada com sucesso')}
         />
-        <TouchableOpacity style={styles.forgotButton} onPress={ () => {}}>
-            <Text style={styles.navButtonText}>Esqueceu a Senha ?</Text>
-        </TouchableOpacity>
+        <View style={styles.textPrivate}>
+          <Text style={styles.color_textPrivate}>Ao se registrar, você confirma que aceita nossos</Text>
+          <TouchableOpacity onPress={() => alert('Termos Lidos')}>
+            <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>Termos De Serviços </Text>
+          </TouchableOpacity>
+          <Text style={styles.color_textPrivate}> e nossas </Text>
+          <Text style={[styles.color_textPrivate, {color: '#e88832'}]}>Políticas De Privacidade</Text>
+        </View>
 
         <SocialButton 
           buttonTitle="Continue com Google"
@@ -62,51 +65,46 @@ const LoginScreen = ({navigation}) => {
 
 
         <TouchableOpacity 
-           style={styles.forgotButton}
-           onPress={ () => navigation.navigate('Signup')}>
+           style={styles.navButton}
+           onPress={ () => navigation.navigate('Login')}>
            <Text style={styles.navButton}>
-              Ainda não tem uma conta? Criar conta 
+              Já tem uma conta? Fazer login 
           </Text>
         </TouchableOpacity>
-        </View>
       </View>
     );
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1, 
-      backgroundColor: '#fff',
       justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+      paddingHorizontal: 17,
+      paddingVertical: 10,
       alignItems: 'center'
       
       
     },
     header: {
-        flex: 1.3,
         justifyContent: 'flex-end',
         paddingHorizontal: 0,
         paddingBottom: 0,
         
     },
     footer: {
-        flex: 3,
+        
         backgroundColor: '#fff',
         borderTopLeftRadius: 35,
         borderTopRightRadius: 35,
         paddingHorizontal: 17,
-        paddingVertical: 30,
+        paddingVertical: 20,
         alignItems: 'center'
     },
-    logo: {
-      height: 110,
-      width: 165,
-      resizeMode: 'cover',
-    },
     text: {
-      fontFamily: 'Poppins-Bold',
+      fontFamily: 'Lato-Regular',
       fontSize: 28,
       marginBottom: 10,
       color: '#0f3482',
@@ -114,20 +112,31 @@ const styles = StyleSheet.create({
       fontWeight:'bold',
     },
     navButton: {
-      marginTop: -5,
+      marginTop: 3,
       color: '#7cacf4',
-      fontWeight:'bold',
-      
-    },
-    forgotButton: {
-      marginVertical: 10,
+      fontWeight: 'bold',
+      fontSize: 16
     },
     navButtonText: {
       fontSize: 18,
       fontWeight: '500',
       color: '#7cacf4',
+      fontFamily: 'Poppins-SemiBold',
       fontWeight:'bold',
+      
     },
+    textPrivate: {
+        flexDirection:'row',
+        flexWrap: 'wrap',
+        marginVertical: 10, 
+        justifyContent: 'center',
+    },
+    color_textPrivate: {
+        fontSize: 13,
+        fontWeight: '400',
+        fontFamily: 'Lato-Regular',
+        color:'grey',
+    }
 });
 
 
